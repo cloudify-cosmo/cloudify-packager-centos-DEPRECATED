@@ -30,11 +30,14 @@ cd /py27
 sudo wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py &&
 sudo /usr/bin/python2.7 get-pip.py &&
 
-# install virtualenv
-sudo /usr/bin/pip2.7 install virtualenv==1.11.4 &&
-
 # install packman
 sudo /usr/bin/pip2.7 install https://github.com/cloudify-cosmo/packman/archive/develop.tar.gz
 
+# create cloudify components package
+cd /home/vagrant/cloudify-packager/ &&
+
+sudo pkm make -c logstash,elasticsearch
+sudo pkm pack -c cloudify-components
+
 echo bootstrap done
-echo NOTE: currently, using some of the packman's features requires that they're run as sudo.
+echo NOTE: currently, using some of the packman's features requires that it's run as sudo.

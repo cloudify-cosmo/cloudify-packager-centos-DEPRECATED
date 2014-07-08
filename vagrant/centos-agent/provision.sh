@@ -36,5 +36,17 @@ sudo /usr/bin/pip2.7 install virtualenv==1.11.4 &&
 # install packman
 sudo /usr/bin/pip2.7 install https://github.com/cloudify-cosmo/packman/archive/develop.tar.gz
 
+# create cloudify components package
+cd /home/vagrant/cloudify-packager/ &&
+
+# create package resources
+sudo pkm get -c centos-agent
+
+# LIMOR, PLEASE COMPLETE THE GET PROCESS HERE
+
+# create package
+sudo pkm pack -c centos-agent
+sudo pkm pack -c cloudify-centos-agent
+
 echo bootstrap done
-echo NOTE: currently, using some of the packman's features requires that they're run as sudo.
+echo NOTE: currently, using some of the packman's features requires that it's run as sudo.
