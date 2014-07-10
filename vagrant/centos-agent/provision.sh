@@ -9,7 +9,7 @@ sudo gem install fpm --no-rdoc --no-ri
 
 # configure gem and bundler
 echo -e 'gem: --no-ri --no-rdoc\ninstall: --no-rdoc --no-ri\nupdate:  --no-rdoc --no-ri' >> ~/.gemrc
-echo -e 'gem: --no-ri --no-rdoc\ninstall: --no-rdoc --no-ri\nupdate:  --no-rdoc --no-ri' >> /root/.gemrc
+sudo echo -e 'gem: --no-ri --no-rdoc\ninstall: --no-rdoc --no-ri\nupdate:  --no-rdoc --no-ri' >> /root/.gemrc
 
 # install python and additions
 # http://bicofino.io/blog/2014/01/16/installing-python-2-dot-7-6-on-centos-6-dot-5/
@@ -30,14 +30,13 @@ cd /py27
 sudo wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py &&
 sudo /usr/bin/python2.7 get-pip.py &&
 
-# install virtualenv
-sudo /usr/bin/pip2.7 install virtualenv==1.11.4 &&
-
 # install packman
 sudo /usr/bin/pip2.7 install https://github.com/cloudify-cosmo/packman/archive/develop.tar.gz
 
-# create cloudify components package
-cd /home/vagrant/cloudify-packager/ &&
+# install virtualenv
+sudo pip install virtualenv==1.11.4 &&
+
+cd /cloudify-packager/ &&
 
 # create package resources
 sudo pkm get -c centos-agent

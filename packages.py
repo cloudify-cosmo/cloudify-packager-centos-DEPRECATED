@@ -399,7 +399,7 @@ PACKAGES = {
         ],
         "package_path": "{0}/rabbitmq-server/".format(COMPONENT_PACKAGES_PATH),
         "sources_path": "{0}/rabbitmq-server".format(PACKAGES_PATH),
-        "dst_package_type": ["rpm]"
+        "dst_package_type": ["rpm"]
     },
     "riemann": {
         "name": "riemann",
@@ -415,7 +415,7 @@ PACKAGES = {
         ],
         "package_path": "{0}/riemann/".format(COMPONENT_PACKAGES_PATH),
         "sources_path": "{0}/riemann".format(PACKAGES_PATH),
-        "dst_package_type": ["rpm]"
+        "dst_package_type": ["rpm"]
     },
     "nodejs": {
         "name": "nodejs",
