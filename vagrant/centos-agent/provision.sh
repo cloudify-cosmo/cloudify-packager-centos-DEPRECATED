@@ -1,3 +1,9 @@
+#!/bin/bash
+
+REST_CLIENT_SHA=""
+COMMON_PLUGIN_SHA=""
+MANAGER_SHA=""
+
 echo bootstrapping...
 
 # update and install prereqs
@@ -41,7 +47,35 @@ cd /cloudify-packager/ &&
 # create package resources
 sudo pkm get -c centos-agent
 
-# LIMOR, PLEASE COMPLETE THE GET PROCESS HERE
+# GET PROCESS
+git clone https://github.com/cloudify-cosmo/cloudify-rest-client.git
+pushd cloudify-rest-client
+	if [ -n "$REST_CLIENT_SHA" ]; then	
+		git reset --hard $REST_CLIENT_SHA
+	fi
+	pip install .
+popd
+git clone https://github.com/cloudify-cosmo/cloudify-plugins-common.git
+pushd cloudify-plugins-common
+	if [ -n "$COMMON_PLUGIN_SHA" ]; then	
+		git reset --hard $COMMON_PLUGIN_SHA
+	fi
+	pip install .
+popd
+git clone https://github.com/cloudify-cosmo/cloudify-manager.git
+pushd cloudify-rest-client
+	if [ -n "$MANAGER_SHA" ]; then	
+		git reset --hard $MANAGER_SHA
+	fi
+	pushd plugins/plugin-installer
+	  pip install .
+	popd
+	pudhd plugins/agent-installer
+	  pip install .
+	popd
+	
+popd
+
 
 # create package
 sudo pkm pack -c centos-agent
