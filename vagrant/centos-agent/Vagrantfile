@@ -43,7 +43,7 @@ Vagrant.configure('2') do |config|
       aws.tags = {
           "Name" => "vagrant agent centos build",
       }
-        aws.security_groups = "vagrant_cfy_build"
+        aws.security_groups = "vagrant_linux_build"
     end
 
     #need to sync folders
