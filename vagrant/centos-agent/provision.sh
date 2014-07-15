@@ -13,10 +13,6 @@ sudo yum install yum-downloadonly wget mlocate yum-utils python-devel libyaml-de
 # install fpm
 sudo gem install fpm --no-rdoc --no-ri
 
-# configure gem and bundler
-echo -e 'gem: --no-ri --no-rdoc\ninstall: --no-rdoc --no-ri\nupdate:  --no-rdoc --no-ri' >> ~/.gemrc
-sudo echo -e 'gem: --no-ri --no-rdoc\ninstall: --no-rdoc --no-ri\nupdate:  --no-rdoc --no-ri' >> /root/.gemrc
-
 # install python and additions
 # http://bicofino.io/blog/2014/01/16/installing-python-2-dot-7-6-on-centos-6-dot-5/
 sudo yum groupinstall -y 'development tools'
@@ -50,21 +46,21 @@ sudo pkm get -c centos-agent
 # GET PROCESS
 git clone https://github.com/cloudify-cosmo/cloudify-rest-client.git
 pushd cloudify-rest-client
-	if [ -n "$REST_CLIENT_SHA" ]; then	
+	if [ -n "$REST_CLIENT_SHA" ]; then
 		git reset --hard $REST_CLIENT_SHA
 	fi
 	pip install .
 popd
 git clone https://github.com/cloudify-cosmo/cloudify-plugins-common.git
 pushd cloudify-plugins-common
-	if [ -n "$COMMON_PLUGIN_SHA" ]; then	
+	if [ -n "$COMMON_PLUGIN_SHA" ]; then
 		git reset --hard $COMMON_PLUGIN_SHA
 	fi
 	pip install .
 popd
 git clone https://github.com/cloudify-cosmo/cloudify-manager.git
 pushd cloudify-rest-client
-	if [ -n "$MANAGER_SHA" ]; then	
+	if [ -n "$MANAGER_SHA" ]; then
 		git reset --hard $MANAGER_SHA
 	fi
 	pushd plugins/plugin-installer
@@ -73,7 +69,7 @@ pushd cloudify-rest-client
 	pudhd plugins/agent-installer
 	  pip install .
 	popd
-	
+
 popd
 
 
