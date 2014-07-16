@@ -33,7 +33,15 @@ sudo wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py &&
 sudo /usr/bin/python2.7 get-pip.py &&
 
 # install packman
-sudo /usr/bin/pip2.7 install https://github.com/cloudify-cosmo/packman/archive/develop.tar.gz
+#sudo /usr/bin/pip2.7 install https://github.com/cloudify-cosmo/packman/archive/develop.tar.gz
+git clone https://github.com/cloudify-cosmo/packman.git
+pushd packman
+	if [ -n "$PACKMAN_SHA" ]; then	
+		git reset --hard $PACKMAN_SHA
+	fi
+	pip install .
+popd
+
 
 # install virtualenv
 sudo pip install virtualenv==1.11.4 &&
