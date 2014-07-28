@@ -3,6 +3,7 @@
 REST_CLIENT_SHA=""
 COMMON_PLUGIN_SHA=""
 MANAGER_SHA=""
+PACKMAN_SHA=""
 
 echo bootstrapping...
 
@@ -32,7 +33,7 @@ cd /py27
 sudo wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py &&
 sudo /usr/bin/python2.7 get-pip.py &&
 
-# install packman
+echo '# install packman'
 #sudo /usr/bin/pip2.7 install https://github.com/cloudify-cosmo/packman/archive/develop.tar.gz
 git clone https://github.com/cloudify-cosmo/packman.git
 pushd packman
@@ -43,15 +44,15 @@ pushd packman
 popd
 
 
-# install virtualenv
+echo '# install virtualenv'
 sudo pip install virtualenv==1.11.4 &&
 
 cd /cloudify-packager/ &&
 
-# create package resources
+echo '# create package resources'
 sudo pkm get -c centos-agent
 
-# GET PROCESS
+echo '# GET PROCESS'
 git clone https://github.com/cloudify-cosmo/cloudify-rest-client.git
 pushd cloudify-rest-client
 	if [ -n "$REST_CLIENT_SHA" ]; then
@@ -74,14 +75,14 @@ pushd cloudify-rest-client
 	pushd plugins/plugin-installer
 	  pip install .
 	popd
-	pudhd plugins/agent-installer
+	pushd plugins/agent-installer
 	  pip install .
 	popd
 
 popd
 
 
-# create package
+echo '# create package'
 sudo pkm pack -c centos-agent
 sudo pkm pack -c cloudify-centos-agent
 
