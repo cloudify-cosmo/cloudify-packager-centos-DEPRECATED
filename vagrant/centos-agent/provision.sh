@@ -48,10 +48,10 @@ sudo pip install virtualenv==1.11.4 &&
 
 cd /cloudify-packager/ &&
 
-# create package resources
+echo '# create package resources'
 sudo pkm get -c centos-agent
 
-# GET PROCESS
+echo '# GET PROCESS'
 git clone https://github.com/cloudify-cosmo/cloudify-rest-client.git
 pushd cloudify-rest-client
 	if [ -n "$REST_CLIENT_SHA" ]; then
@@ -74,7 +74,7 @@ pushd cloudify-rest-client
 	pushd plugins/plugin-installer
 	  pip install .
 	popd
-	pudhd plugins/agent-installer
+	pushd plugins/agent-installer
 	  pip install .
 	popd
 
