@@ -3,6 +3,7 @@
 REST_CLIENT_SHA=""
 COMMON_PLUGIN_SHA=""
 MANAGER_SHA=""
+PACKMAN_SHA=""
 
 echo bootstrapping...
 
