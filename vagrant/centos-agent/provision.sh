@@ -3,16 +3,12 @@
 REST_CLIENT_SHA=""
 COMMON_PLUGIN_SHA=""
 MANAGER_SHA=""
-PACKMAN_SHA=""
 
 echo bootstrapping...
 
 # update and install prereqs
 sudo yum -y update &&
 sudo yum install yum-downloadonly wget mlocate yum-utils python-devel libyaml-devel ruby rubygems ruby-devel -y
-
-# install fpm
-sudo gem install fpm --no-rdoc --no-ri
 
 # install python and additions
 # http://bicofino.io/blog/2014/01/16/installing-python-2-dot-7-6-on-centos-6-dot-5/
@@ -28,23 +24,26 @@ sudo ./configure --prefix=/usr
 sudo make
 sudo make altinstall
 
+# install fpm
+sudo gem install fpm --no-rdoc --no-ri
+
 # install pip
 cd /py27
 sudo wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py &&
 sudo /usr/bin/python2.7 get-pip.py &&
 
-echo '# install packman'
+# install packman
 #sudo /usr/bin/pip2.7 install https://github.com/cloudify-cosmo/packman/archive/develop.tar.gz
 git clone https://github.com/cloudify-cosmo/packman.git
 pushd packman
-	if [ -n "$PACKMAN_SHA" ]; then	
+	if [ -n "$PACKMAN_SHA" ]; then
 		git reset --hard $PACKMAN_SHA
 	fi
 	pip install .
 popd
 
 
-echo '# install virtualenv'
+# install virtualenv
 sudo pip install virtualenv==1.11.4 &&
 
 cd /cloudify-packager/ &&
@@ -58,31 +57,31 @@ pushd cloudify-rest-client
 	if [ -n "$REST_CLIENT_SHA" ]; then
 		git reset --hard $REST_CLIENT_SHA
 	fi
-	pip install .
+	/centos-agent/env/bin/pip install .
 popd
 git clone https://github.com/cloudify-cosmo/cloudify-plugins-common.git
 pushd cloudify-plugins-common
 	if [ -n "$COMMON_PLUGIN_SHA" ]; then
 		git reset --hard $COMMON_PLUGIN_SHA
 	fi
-	pip install .
+	/centos-agent/env/bin/pip install .
 popd
 git clone https://github.com/cloudify-cosmo/cloudify-manager.git
-pushd cloudify-rest-client
+pushd cloudify-manager
 	if [ -n "$MANAGER_SHA" ]; then
 		git reset --hard $MANAGER_SHA
 	fi
 	pushd plugins/plugin-installer
-	  pip install .
+	  /centos-agent/env/bin/pip install .
 	popd
 	pushd plugins/agent-installer
-	  pip install .
+	  /centos-agent/env/bin/pip install .
 	popd
 
 popd
 
 
-echo '# create package'
+# create package
 sudo pkm pack -c centos-agent
 sudo pkm pack -c cloudify-centos-agent
 
