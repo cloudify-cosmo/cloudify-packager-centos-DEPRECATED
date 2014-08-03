@@ -53,6 +53,7 @@ echo '# create package resources'
 sudo pkm get -c centos-agent
 
 echo '# GET PROCESS'
+/centos-agent/env/bin/pip install celery==3.0.24
 git clone https://github.com/cloudify-cosmo/cloudify-rest-client.git
 pushd cloudify-rest-client
 	if [ -n "$REST_CLIENT_SHA" ]; then
