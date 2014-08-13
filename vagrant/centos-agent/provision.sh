@@ -67,16 +67,19 @@ pushd cloudify-plugins-common
 	pip install .
 popd
 git clone https://github.com/cloudify-cosmo/cloudify-manager.git
-pushd cloudify-rest-client
+pushd cloudify-manager
 	if [ -n "$MANAGER_SHA" ]; then
 		git reset --hard $MANAGER_SHA
 	fi
+	echo "# Installing plugin-installer..."
 	pushd plugins/plugin-installer
 	  pip install .
 	popd
+	echo "# Installing agent-installer..."
 	pushd plugins/agent-installer
 	  pip install .
 	popd
+	echo "# Installing windows-agent-installer..."
 	pushd plugins/windows-agent-installer
 	  pip install .
 	popd
