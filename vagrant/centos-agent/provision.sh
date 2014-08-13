@@ -77,6 +77,9 @@ pushd cloudify-rest-client
 	pushd plugins/agent-installer
 	  pip install .
 	popd
+	pushd plugins/windows-agent-installer
+	  pip install .
+	popd
 
 popd
 
