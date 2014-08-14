@@ -79,7 +79,9 @@ pushd cloudify-manager
 	pushd plugins/agent-installer
 	  /centos-agent/env/bin/pip install .
 	popd
-
+	pushd plugins/windows-agent-installer
+	  /centos-agent/env/bin/pip install .
+	popd
 popd
 
 
