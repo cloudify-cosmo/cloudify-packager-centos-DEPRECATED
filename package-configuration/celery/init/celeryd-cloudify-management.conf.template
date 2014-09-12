@@ -26,7 +26,7 @@ env CELERY_RESULT_BACKEND="amqp://"
 
 
 exec {{ config_templates.__params_init.work_dir }}/env/bin/python -m celery.bin.celeryd \
---include=system_workflows.workers_installation,plugin_installer.tasks,worker_installer.tasks \
+--include=cloudify_system_workflows.deployment_environment,plugin_installer.tasks,worker_installer.tasks,riemann_controller.tasks,cloudify.plugins.workflows \
 --broker=amqp:// \
 -n celery.cloudify.management \
 --events \
