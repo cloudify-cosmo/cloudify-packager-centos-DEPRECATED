@@ -4,6 +4,7 @@ REST_CLIENT_SHA=""
 COMMON_PLUGIN_SHA=""
 MANAGER_SHA=""
 PACKMAN_SHA=""
+SCRIPTS_PLUGIN_SHA=""
 
 echo bootstrapping...
 
@@ -71,8 +72,8 @@ pushd cloudify-plugins-common
 popd
 git clone https://github.com/cloudify-cosmo/cloudify-script-plugin.git
 pushd cloudify-script-plugin
-	if [ -n "$SCRIPT_PLUGIN_SHA" ]; then
-		git reset --hard $SCRIPT_PLUGIN_SHA
+	if [ -n "$SCRIPTS_PLUGIN_SHA" ]; then
+		git reset --hard $SCRIPTS_PLUGIN_SHA
 	fi
 	/centos-agent/env/bin/pip install .
 popd
